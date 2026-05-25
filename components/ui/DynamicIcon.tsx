@@ -1,0 +1,27 @@
+import * as LucideIcons from "lucide-react";
+import type { LucideProps } from "lucide-react";
+
+interface DynamicIconProps extends LucideProps {
+  name: string;
+}
+
+// Convert snake_case or kebab-case to PascalCase
+function toPascalCase(str: string): string {
+  return str
+    .split(/[-_\s]+/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join("");
+}
+
+export function DynamicIcon({ name, ...props }: DynamicIconProps) {
+  const pascalName = toPascalCase(name);
+  const Icon = (LucideIcons as Record<string, React.ComponentType<LucideProps>>)[pascalName];
+
+  if (!Icon) {
+    // Fallback icon
+    const Fallback = LucideIcons.BookOpen;
+    return <Fallback {...props} />;
+  }
+
+  return <Icon {...props} />;
+}
