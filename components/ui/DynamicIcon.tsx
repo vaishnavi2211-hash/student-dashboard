@@ -15,7 +15,10 @@ function toPascalCase(str: string): string {
 
 export function DynamicIcon({ name, ...props }: DynamicIconProps) {
   const pascalName = toPascalCase(name);
-  const Icon = (LucideIcons as Record<string, React.ComponentType<LucideProps>>)[pascalName];
+
+const Icon = (LucideIcons as unknown as Record<string, React.ComponentType<LucideProps>>)[pascalName];
+
+
 
   if (!Icon) {
     // Fallback icon
