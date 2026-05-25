@@ -5,7 +5,6 @@ interface DynamicIconProps extends LucideProps {
   name: string;
 }
 
-// Convert snake_case or kebab-case to PascalCase
 function toPascalCase(str: string): string {
   return str
     .split(/[-_\s]+/)
@@ -15,13 +14,9 @@ function toPascalCase(str: string): string {
 
 export function DynamicIcon({ name, ...props }: DynamicIconProps) {
   const pascalName = toPascalCase(name);
-
-const Icon = (LucideIcons as unknown as Record<string, React.ComponentType<LucideProps>>)[pascalName];
-
-
+  const Icon = (LucideIcons as unknown as Record<string, React.ComponentType<LucideProps>>)[pascalName];
 
   if (!Icon) {
-    // Fallback icon
     const Fallback = LucideIcons.BookOpen;
     return <Fallback {...props} />;
   }
