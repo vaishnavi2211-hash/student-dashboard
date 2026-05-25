@@ -12,13 +12,14 @@ export function createClient() {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet: { name: string; value: string; options?: Record<string, unknown> }[]) {
+        setAll(cookiesToSet: { name: string; value: string; options?: object }[]) {
           try {
             cookiesToSet.forEach(({ name, value, options }) => {
-              cookieStore.set(name, value, options as Parameters<typeof cookieStore.set>[2]);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              cookieStore.set(name, value, options as any);
             });
           } catch {
-            // Server Component — read-only cookies, safe to ignore
+            // read-only in Server Components
           }
         },
       },
