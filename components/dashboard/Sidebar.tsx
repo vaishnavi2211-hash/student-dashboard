@@ -127,7 +127,7 @@ export function Sidebar() {
                   exit={{ opacity: 0 }}
                   className="min-w-0"
                 >
-                  <p className="text-sm font-medium text-white truncate">Alex Johnson</p>
+                  <p className="text-sm font-medium text-white truncate">kishna</p>
                   <p className="text-xs text-white/40 truncate">Pro Member</p>
                 </motion.div>
               )}
